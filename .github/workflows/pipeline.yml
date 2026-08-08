@@ -1,7 +1,12 @@
-name: Lint
+name: Deployment pipeline
 
 on:
   push:
+    branches:
+      - main
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
@@ -19,3 +24,9 @@ jobs:
 
       - name: Check style
         run: npm run eslint
+
+      - name: test
+        run: npm test
+
+      - name: build
+        run: npm run build
