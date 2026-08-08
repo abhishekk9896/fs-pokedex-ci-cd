@@ -1,6 +1,7 @@
 module.exports = {
   "env": {
     "browser": true,
+    "node": true,
     "es6": true,
     "jest/globals": true
   },
@@ -12,17 +13,22 @@ module.exports = {
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": 2018,
+    "ecmaVersion": "latest",
     "sourceType": "module"
   },
   "plugins": [
     "react", "jest"
   ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "rules": {
     "indent": [
       "error",
-        2
-      ],
+      2
+    ],
     "linebreak-style": [
       "error",
       "unix"
@@ -45,5 +51,21 @@ module.exports = {
     ],
     "no-console": "error",
     "react/prop-types": 0
-  }
+  },
+  // ADD THIS BLOCK TO FIX JEST.SETUP.JS ERRORS:
+  "overrides": [
+    {
+      "files": [
+        "jest.setup.js",
+        "*.config.js"
+      ],
+      "env": {
+        "node": true,
+        "jest": true
+      },
+      "parserOptions": {
+        "sourceType": "script"
+      }
+    }
+  ]
 }
