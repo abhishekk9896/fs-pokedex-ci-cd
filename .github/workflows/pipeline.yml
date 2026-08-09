@@ -25,8 +25,14 @@ jobs:
       - name: Check style
         run: npm run eslint
 
-      - name: test
+      - name: Test
         run: npm test
 
-      - name: build
+      - name: Build
         run: npm run build
+
+      - name: Deploy to Render
+        if: github.ref == 'refs/heads/main'
+        run: curl "$RENDER_DEPLOY_HOOK_URL"
+        env:
+          RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
